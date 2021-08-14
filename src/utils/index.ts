@@ -81,7 +81,7 @@ export function checkVitaminsLimit(
     configProducts.forEach((confProduct) => {
       if (key === confProduct.id && value.totalAmount > confProduct.amount) {
         isAllowed = false;
-        return false;
+        return;
       }
     });
   }
@@ -90,7 +90,7 @@ export function checkVitaminsLimit(
 }
 
 function groupVitamin(products: Array<types.CartProduct>) {
-  const groupVitamins: Record<string, any> = {};
+  const groupVitamins: Record<string, Record<string, any>> = {};
   products.forEach((product) =>
     product.nutrients.forEach((vitamin) => {
       let obj = groupVitamins;
