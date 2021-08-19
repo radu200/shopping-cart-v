@@ -1,4 +1,4 @@
-import * as types from "../types";
+import * as types from '../types';
 
 export function buildCart(
   products: Array<types.CartProduct> | [],
@@ -56,18 +56,20 @@ export function removeProduct(
 export function addZeroes(num: number) {
   return num.toFixed(2);
 }
-export function getTotal(products: Array<types.CartProduct>) {
-  const totalPrice = products.reduce(
-    (accumulator, current) => accumulator + current.totalPrice,
-    0
-  );
 
-  const totalQuantity = products.reduce(
-    (accumulator, current) => accumulator + current.quantity,
-    0
+export function getTotal(products: Array<types.CartProduct>): {
+  totalPrice: number;
+  totalQuantity: number;
+} {
+  //new version
+  const total = products.reduce<Record<string, number>>(
+    (accumulator, current) => ({
+      totalPrice: accumulator.totalPrice + current.totalPrice,
+      quantity: accumulator.quantity + current.quantity,
+    }),
+    { totalPrice: 0, quantity: 0 }
   );
-
-  return { totalPrice, totalQuantity };
+  return { totalPrice: total.totalPrice, totalQuantity: total.quantity };
 }
 
 export function checkVitaminsLimit(
@@ -101,11 +103,12 @@ function groupVitamin(products: Array<types.CartProduct>) {
           quantity: product.quantity,
         };
       } else {
-        obj[vitamin.id].quantity = obj[vitamin.id].quantity + 1;
+        obj[vitamin.id].quantity = obj[vitamin.id].quantity + product.quantity;
       }
       obj[vitamin.id].totalAmount =
         obj[vitamin.id].quantity * obj[vitamin.id].amount;
     })
   );
+  console.log(groupVitamins);
   return groupVitamins;
 }

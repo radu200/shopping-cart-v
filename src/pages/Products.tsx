@@ -35,8 +35,6 @@ export default function ProductsPage({ currency, products, cart, addToCart, remo
   return (
 
     <div className={classes.root}>
-
-
       <Typography gutterBottom variant="h5" component="h4">
         Basket - Quantity: {cart.totalQuantity} Price: {addZeroes(cart.totalPrice)} {currency}
       </Typography>

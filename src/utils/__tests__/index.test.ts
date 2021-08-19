@@ -156,7 +156,7 @@ describe("Remove from cart", () => {
   });
 });
 
-describe("it decimals", () => {
+describe("Decimals", () => {
   it("should add zero to decimal", () => {
     const num = 4.5;
     const output = "4.50";
@@ -177,7 +177,7 @@ describe("it decimals", () => {
 });
 
 describe("Cart total", () => {
-  it("whould output total price and total quantity of products", () => {
+  it("should output total price and total quantity of products", () => {
     const cartProducts = [
       {
         name: "vitamin_a",
